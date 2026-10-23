@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Pricing — StegoTool Pro Learning Lab</title>
+<link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="brand"><img src="assets/logo.png" alt=""> Learning Lab</a>
+  <ul class="nav-links">
+    <li><a href="index.html">All Lessons</a></li>
+    <li><a href="advanced.html">Advanced</a></li>
+    <li><a href="pricing.html" class="active">Pricing</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <h1>Simple pricing</h1>
+  <p>Free forever for the basics. One unlock for everything advanced.</p>
+</section>
+
+<div class="container" style="max-width: 800px;">
+
+  <div class="note note-warning" style="margin-bottom: 24px;">
+    Checkout isn't live yet -- this page previews the pricing model. The only way to
+    access Pro content right now is a coupon code (see below), meant for testing.
+  </div>
+
+  <div class="card-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 32px;">
+    <div class="card">
+      <h2>Free</h2>
+      <p style="font-size: 2rem; font-weight: 700; margin: 8px 0;">$0</p>
+      <ul style="color: var(--text-muted); line-height: 2; padding-left: 20px;">
+        <li>All 3 lessons' Basic level</li>
+        <li>Theory, simulation, summary &amp; quiz for each</li>
+        <li>Bit-Plane Inspector, live hash demo, clean/stego compare</li>
+        <li>Certificates require both Basic <em>and</em> Advanced</li>
+      </ul>
+      <button class="btn btn-outline" style="width:100%; margin-top: 12px;" disabled>Current plan</button>
+    </div>
+
+    <div class="card" style="border-color: var(--purple);">
+      <h2>Pro <span class="badge badge-pro">All lessons</span></h2>
+      <p style="font-size: 2rem; font-weight: 700; margin: 8px 0;" id="pro-price">$14.99 <span style="font-size: 1rem; font-weight: 400; color: var(--text-muted);">one-time</span></p>
+      <ul style="color: var(--text-muted); line-height: 2; padding-left: 20px;">
+        <li>Everything in Free, plus:</li>
+        <li>All 3 lessons' Advanced level</li>
+        <li>Mini-CTF, Key Derivation Visualizer, full Detector playground</li>
+        <li>Unlocks certificates for every lesson</li>
+      </ul>
+      <button class="btn btn-primary" style="width:100%; margin-top: 12px;" id="upgrade-btn">Upgrade to Pro</button>
+    </div>
+  </div>
+
+  <div class="card" id="coupon-card">
+    <h2>Have a coupon code?</h2>
+    <p style="color: var(--text-muted);">Enter it below -- applied instantly, no need to click through anything else.</p>
+    <div style="display:flex; gap: 12px; flex-wrap: wrap; margin-top: 12px;">
+      <input type="text" id="coupon-input" placeholder="e.g. TESTFREE100" style="flex:1; min-width:200px; text-transform: uppercase;">
+      <button class="btn btn-primary" id="coupon-apply-btn">Apply</button>
+    </div>
+    <div id="coupon-feedback" style="margin-top: 12px; display:none;"></div>
+  </div>
+
+  <div class="card" id="pro-status-card" style="display:none; text-align:center;">
+    <h2>✅ Pro is unlocked in this browser</h2>
+    <p style="color: var(--text-muted);">All Advanced lessons are now fully accessible.</p>
+    <a class="btn btn-primary" href="index.html">Go to Lessons</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>Companion site for StegoTool Pro. Runs entirely in your browser.</p>
+</footer>
+
+<script src="js/pro-status.js?v=2"></script>
+<script src="js/coupons.js?v=2"></script>
+<script>
+  const couponInput = document.getElementById("coupon-input");
+  const applyBtn = document.getElementById("coupon-apply-btn");
+  const feedback = document.getElementById("coupon-feedback");
+  const upgradeBtn = document.getElementById("upgrade-btn");
+  const couponCard = document.getElementById("coupon-card");
+  const proStatusCard = document.getElementById("pro-status-card");
+
+  function refreshProState() {
+    if (isProUnlocked()) {
+      proStatusCard.style.display = "block";
+      couponCard.style.display = "none";
+      upgradeBtn.textContent = "Already unlocked";
+      upgradeBtn.disabled = true;
+    }
+  }
+  refreshProState();
+
+  function showFeedback(ok, message) {
+    feedback.style.display = "block";
+    feedback.className = ok ? "note" : "note note-warning";
+    feedback.textContent = message;
+  }
+
+  applyBtn.addEventListener("click", () => {
+    const result = applyCoupon(couponInput.value);
+    showFeedback(result.ok, result.message);
+    if (result.ok && result.fullyUnlocked) refreshProState();
+  });
+
+  couponInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") applyBtn.click();
+  });
+
+  upgradeBtn.addEventListener("click", () => {
+    couponCard.scrollIntoView({ behavior: "smooth", block: "center" });
+    couponInput.focus();
+  });
+</script>
+</body>
+</html>

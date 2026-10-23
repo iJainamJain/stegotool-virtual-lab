@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Advanced — StegoTool Pro Learning Lab</title>
+<link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="brand"><img src="assets/logo.png" alt=""> Learning Lab</a>
+  <ul class="nav-links">
+    <li><a href="index.html">All Lessons</a></li>
+    <li><a href="advanced.html" class="active">Advanced</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+  </ul>
+</nav>
+
+<div class="container" style="padding-top: 40px;">
+  <h1>Advanced Techniques <span class="badge badge-pro">Pro</span></h1>
+  <p style="color: var(--text-muted); max-width: 640px;">
+    The techniques that power StegoTool Pro's advanced encoding modes, and the
+    steganalysis attacks that try to detect them -- plus a full interactive detector
+    playground and hands-on CTF challenges.
+  </p>
+
+  <div class="note note-warning" style="margin: 20px 0;">
+    Pro tier isn't live yet -- checkout isn't wired up. This page previews what it'll
+    contain. If you're seeing this, you're looking at the plan, not a working purchase
+    flow.
+  </div>
+
+  <div class="card-grid">
+    <div class="tile lock-overlay-wrap">
+      <div class="locked">
+        <div class="icon">🧩</div>
+        <h3>PVD (Pixel-Value Differencing)</h3>
+        <p>How PVD hides more data than LSB by exploiting how much a pixel can differ
+          from its neighbor before the change becomes visible.</p>
+      </div>
+    </div>
+
+    <div class="tile lock-overlay-wrap">
+      <div class="locked">
+        <div class="icon">🌐</div>
+        <h3>DCT-domain hiding</h3>
+        <p>How JPEG's own compression math (the Discrete Cosine Transform) becomes a
+          hiding place that survives re-compression.</p>
+      </div>
+    </div>
+
+    <div class="tile lock-overlay-wrap">
+      <div class="locked">
+        <div class="icon">📡</div>
+        <h3>Spread spectrum</h3>
+        <p>Why spreading a payload thin across many samples makes it look like ordinary
+          noise instead of a deliberate change.</p>
+      </div>
+    </div>
+
+    <div class="tile lock-overlay-wrap">
+      <div class="locked">
+        <div class="icon">📊</div>
+        <h3>Chi-square attack</h3>
+        <p>The statistical test that catches LSB's fixed bit-flipping pattern -- and
+          why it's blind to PVD and spread spectrum.</p>
+      </div>
+    </div>
+
+    <div class="tile lock-overlay-wrap">
+      <div class="locked">
+        <div class="icon">📈</div>
+        <h3>PVD boundary-artifact detection</h3>
+        <p>How PVD's own range boundaries leave a different, detectable fingerprint
+          than LSB's.</p>
+      </div>
+    </div>
+
+    <div class="tile lock-overlay-wrap">
+      <div class="locked">
+        <div class="icon">🔑</div>
+        <h3>Key Derivation Visualizer</h3>
+        <p>Step through StegoTool Pro's own real key-derivation parameters turning a
+          password into an encryption key.</p>
+      </div>
+    </div>
+
+    <div class="tile lock-overlay-wrap">
+      <div class="locked">
+        <div class="icon">🧪</div>
+        <h3>Full Simulation playground</h3>
+        <p>Run the real chi-square and PVD-boundary detectors on your own images and
+          see the underlying histograms, not just a pass/fail.</p>
+      </div>
+    </div>
+
+    <div class="tile lock-overlay-wrap">
+      <div class="locked">
+        <div class="icon">🚩</div>
+        <h3>Mini-CTF challenges</h3>
+        <p>Find a flag hidden with real LSB encoding, break a classic cipher -- hands-on
+          challenges, not just reading.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top: 32px; text-align: center;">
+    <h2>Want early access?</h2>
+    <p style="color: var(--text-muted);">
+      Pro tier is still being built. There's no purchase flow live yet -- this page is a
+      preview of what it'll contain once it is.
+    </p>
+    <a class="btn btn-primary" href="pricing.html">See Pricing</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>Companion site for StegoTool Pro. Runs entirely in your browser.</p>
+</footer>
+
+</body>
+</html>
