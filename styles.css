@@ -1,4 +1,5 @@
 :root {
+  color-scheme: dark;
   --bg: #0b1020;
   --bg-elevated: #131a30;
   --card: #161d38;
@@ -26,7 +27,11 @@ html, body {
   color: var(--text);
   font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
+
+body { overflow-wrap: break-word; }
 
 body {
   background-image:
@@ -204,6 +209,10 @@ nav.site-nav {
   gap: 16px;
 }
 
+/* Fixed two-column grid (Basic/Advanced tiles, Free/Pro plans). Collapses to
+   one column on phones -- see the mobile block at the end of this file. */
+.card-grid.grid-2 { grid-template-columns: 1fr 1fr; }
+
 .tile {
   background: var(--card);
   border: 1px solid var(--card-border);
@@ -234,7 +243,7 @@ nav.site-nav {
 
 .badge {
   display: inline-block;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -401,3 +410,79 @@ code, pre {
 }
 
 pre { padding: 14px; overflow-x: auto; }
+
+/* ---- Mobile ---- */
+/* Everything below only changes layout/sizing on narrow screens; the desktop
+   look above is untouched. */
+@media (max-width: 640px) {
+  /* The two-row nav was sticky and ate ~90px of every phone screen. */
+  nav.site-nav { position: static; padding: 10px 12px; }
+  .nav-links { gap: 0 4px; }
+  .brand { min-height: 44px; }
+  /* Comfortable tap targets (the text links were ~18px tall). */
+  .nav-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 10px;
+  }
+
+  /* iOS repaints fixed backgrounds on every scroll frame; let it scroll. */
+  body { background-attachment: scroll; }
+
+  .container { padding: 0 16px; }
+  .hero { padding: 36px 16px 28px; }
+  .hero img.logo { width: 72px; height: 72px; margin-bottom: 14px; }
+  .hero p { font-size: 1rem; }
+
+  .card { padding: 18px 16px; }
+  .tile { padding: 16px; }
+
+  .card-grid.grid-2 { grid-template-columns: 1fr; }
+
+  .stats-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 12px;
+    padding: 18px 12px;
+  }
+
+  .btn {
+    min-height: 44px;
+    justify-content: center;
+  }
+
+  .quiz-option { padding: 14px; min-height: 48px; }
+
+  .drop-zone { padding: 28px 16px; }
+
+  .controls { gap: 12px; }
+  .canvas-row { gap: 14px; }
+
+  /* 16px+ stops iOS Safari zooming the page when a field is focused, and the
+     taller boxes are easier to hit with a thumb. */
+  select, input[type="text"], textarea {
+    font-size: 16px;
+    min-height: 44px;
+  }
+  input[type="range"] { min-height: 44px; width: 100%; }
+  input[type="checkbox"], input[type="radio"] { width: 22px; height: 22px; flex-shrink: 0; }
+  /* The label is the real tap target for a checkbox/radio. */
+  label:has(input[type="checkbox"]), label:has(input[type="radio"]) {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+  }
+  .note a { display: inline-block; padding: 10px 0; }
+
+  /* Long unbroken strings (hex keys, hashes) must wrap, not widen the page. */
+  code, pre, .card p, .card li { overflow-wrap: anywhere; }
+
+  footer { padding: 28px 16px 40px; }
+}
+
+@media (max-width: 360px) {
+  .nav-links a { padding: 0 8px; }
+  .hero h1 { font-size: 1.6rem; }
+}
